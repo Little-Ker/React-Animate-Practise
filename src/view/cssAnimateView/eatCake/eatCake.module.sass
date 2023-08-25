@@ -1,0 +1,107 @@
+* 
+  transition: .5s
+
+$hairColor: #fff
+$eyeColor: #fff
+$eyeBallColor: #234bff
+$faceColor: #ffb056
+$mouthColor: #fd782b
+$cakeColor: #ffc251
+
+$faceShadow: inset -15px -15px 0px darken($faceColor, 6%)
+
+=flexCenter
+  display: flex
+  justify-content: center
+  align-items: center
+
+=rectangle($w, $h: $w, $bdrs: 0)
+  width: $w
+  height: $h
+  border-radius: $bdrs
+
+=insetBoxShadow($color, $size: -15px)
+  box-shadow: inset $size $size 0px darken($color, 6%)
+
+=personBoxShadow($posX: 15px, $posY: 15px)
+  box-shadow: $faceShadow, $posX $posY 0 rgba(#000, 18%)
+      
+.eatCakeView
+  +rectangle(100%, calc(100vh - 121px))
+  +flexCenter
+  .scene
+    +rectangle(800px, 600px)
+    +flexCenter
+    background: #ccc
+    margin-top: -120px
+    position: relative
+    .title
+      position: absolute
+      top: 40px
+      left: 60px
+      font-size: 36px
+      color: #fff
+    .person
+      position: relative
+      .hair
+        position: relative
+        margin-bottom: -40px
+        .hair1, .hair2, .hair3
+          background-color: $hairColor
+          +insetBoxShadow($hairColor)
+        .hair1
+          +rectangle(200px, 70px, 30px)
+          margin-bottom: -20px
+          margin-left: 5px
+        .hair2
+          +rectangle(230px, 65px, 30px)
+          margin-bottom: -20px
+          margin-left: 20px
+        .hair3
+          +rectangle(200px, 60px, 30px)
+          margin-bottom: -10px
+      .face
+        +rectangle(240px, 200px, 40px)
+        background-color: $faceColor
+        padding-top: 65px
+        +insetBoxShadow($faceColor)
+        +personBoxShadow(20px, 20px)
+        .eyes
+          .eye
+            +rectangle(80px, 40px, 40px)
+            display: inline-block
+            margin-right: 20px
+            background-color: $eyeColor
+            +insetBoxShadow($eyeColor, -5px)
+            .eyeBall
+              +rectangle(40px, 40px, 40px)
+              background-color: $eyeBallColor
+              +insetBoxShadow($eyeBallColor, -5px)
+        .mouse
+          +rectangle(100px, 25px, 40px)
+          margin-top: 30px
+          position: relative
+          left: 50%
+          transform: translateX(-50%)
+          background-color: $mouthColor
+          +insetBoxShadow($mouthColor, -5px)
+          .cake
+            +rectangle(25px, 25px, 40px)
+            margin-left: -45px
+            background-color: $cakeColor
+            +insetBoxShadow($cakeColor, -5px)
+.scene
+  &:hover
+    .person
+      transform: translateX(50px)
+      .face
+        +personBoxShadow(-20px, 20px)
+        .eyeBall
+          transform: translateX(50px)
+        .mouse
+          left: 60%
+  &:active
+    .person
+      transform: scale(0.9)
+      .hair
+        transform: translateY(-60px)
