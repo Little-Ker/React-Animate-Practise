@@ -1,0 +1,189 @@
+* 
+  transition: .5s all
+  // border: 1px solid #444
+
+$sceneColor: #92b986
+$desktopColor: #3b5533
+$dogColor: #ffbd2e
+$earColor: #f5897a
+$eyeColor: #fff
+$eyeBallColor: #4164ff
+$faceColor: #f3f3f3
+$noseColor: #2b1700
+$mouthColor: #2b1700
+$tongueColor: #ffb7ad
+
+$dogShadow: inset -15px -15px 3px darken($dogColor, 10%)
+
+=flexCenter
+  display: flex
+  justify-content: center
+  align-items: center
+
+=rectangle($w, $h: $w, $bdrs: 0)
+  width: $w
+  height: $h
+  border-radius: $bdrs
+
+=insetShadow($color, $size: -15px)
+  box-shadow: inset $size $size 3px darken($color, 10%)
+
+=insetRightShadow($color, $size: -15px)
+  box-shadow: inset $size 0 3px darken($color, 10%)
+
+=DogShadow($posX: 15px, $posY: 15px)
+  box-shadow: $dogShadow, $posX $posY 5px rgba(#000, 18%)
+
+.dogView
+  +rectangle(100%, calc(100vh - 121px))
+  +flexCenter
+  .scene
+    +rectangle(800px, 600px, 30px)
+    +flexCenter
+    overflow: hidden
+    background: $sceneColor
+    margin-top: -120px
+    position: relative
+  .desktop
+    position: absolute
+    bottom: 0
+    +rectangle(100%, 30%)
+    border-radius: 0 0 30px 30px
+    background: $desktopColor
+    +insetShadow($desktopColor, $size: -15px)
+  .dog
+    +rectangle(200px, 160px, 40px)
+    position: relative
+    background: $dogColor
+    +DogShadow(20px, 20px)
+    transform: translateY(115px)
+    .ears
+      position: absolute
+      width: 100%
+      display: flex
+      justify-content: space-between
+      top: -80px
+      .ear1, .ear2 
+        +rectangle(70px, 115px)
+        position: relative
+        display: flex
+        justify-content: center
+        align-items: flex-end
+        background: $dogColor
+      .ear1
+        border-radius: 30px 70px 0 0
+      .ear2
+        border-radius: 70px 30px 0 0
+        +insetRightShadow($dogColor)
+        right: 0
+      .innerEar1, .innerEar2
+        +rectangle(50px, 60px)
+        background: $earColor
+        margin-bottom: 35px
+        box-shadow: inset -5px -5px 3px darken($earColor, 6%)
+      .innerEar1
+        border-radius: 30px 70px 0 0
+      .innerEar2
+        border-radius: 70px 30px 0 0
+    .eyes
+      margin-top: 5px
+      .eye
+        +rectangle(50px, 50px, 50%)
+        display: inline-block
+        margin: 0 20px
+        margin-top: 30px
+        background: $eyeColor
+        +insetShadow($eyeColor, -5px)
+        .eyeBall
+          +rectangle(30px, 30px, 50%)
+          background: $eyeBallColor
+          transform: translate(3px, 3px)
+          +insetShadow($eyeBallColor, -5px)
+          animation: eyeBallMove 5s linear
+          animation-fill-mode: forwards
+          animation-iteration-count: infinite
+    .bottomFace
+      display: flex
+      flex-direction: column
+      align-items: center
+      +rectangle(100%, 45%, 25px)
+      position: relative
+      background: $faceColor
+      +insetShadow($faceColor)
+      &::before
+        content: ''
+        +rectangle(40px, 40px, 0)
+        border-radius: 20px 20px 0 0
+        position: absolute
+        top: -30px
+        left: 50%
+        transform: translateX(-50%)
+        background: $faceColor
+      .nose
+        +rectangle(25px, 15px, 10px)
+        margin-top: -20px
+        position: relative
+        background: $noseColor
+        +insetShadow(#000, -5px)
+      .mouse
+        +rectangle(60px, 5px, 10px)
+        margin-top: 20px
+        position: relative
+        background: $mouthColor
+        +insetShadow($mouthColor, -5px)
+        &::after, &::before
+          background: $mouthColor
+          content: ''
+          position: absolute
+          top: -7px
+          +rectangle(5px, 12px, 10px)
+          +insetShadow(#000, -5px)
+        &::after
+          left: 0
+        &::before
+          right: 0
+        .tongue
+          position: absolute
+          left: 50%
+          transform: translate(-50%, 5px)
+          +rectangle(30px, 0, 0)
+          border-radius: 0 0 20px 20px
+          background: $tongueColor
+          +insetShadow($tongueColor, -5px)
+          overflow: hidden
+          transition-delay: .5s
+          &::after
+            content: ''
+            position: absolute
+            +rectangle(5px, 25px, 10px)
+            bottom: 0
+            left: 50%
+            transform: translateX(-50%)
+            background: darken($tongueColor, 15%)
+            +insetShadow(darken($tongueColor, 15%), -3px)
+
+.scene
+  &:hover
+    .dog
+      transform: translateY(-20px)
+      +DogShadow(5px, 60px)
+      .eyes
+        .eyeBall
+          animation-play-state: paused
+          transform: translate(3px, 3px)
+      .mouse
+        .tongue
+          height: 40px
+
+@keyframes eyeBallMove
+    0%
+      transform: translate(3px, 3px)
+    10%
+      transform: translate(3px, 3px)
+    50%
+      transform: translate(15px, 3px)
+    60%
+      transform: translate(15px, 3px)
+    100%
+      transform: translate(3px, 3px)
+    

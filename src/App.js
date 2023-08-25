@@ -7,6 +7,7 @@ import Navbar from './component/navbar/Navbar'
 import ViewA from './view/ViewA'
 import ViewB from './view/ViewB'
 import EatCake from './view/cssAnimateView/eatCake'
+import Dog from './view/cssAnimateView/dog'
  
 const RouterPage = () => {
   return (
@@ -15,6 +16,7 @@ const RouterPage = () => {
       <Route exact path="viewA" element={<ViewA/>} />
       <Route exact path="viewB" element={<ViewB/>} />
       <Route exact path="eatCake" element={<EatCake/>} />
+      <Route exact path="dog" element={<Dog/>} />
       <Route path="*" element={<ViewA/>} />
     </Routes>
   )
