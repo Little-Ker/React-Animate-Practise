@@ -35,14 +35,13 @@ $dogShadow: inset -15px -15px 3px darken($dogColor, 10%)
   box-shadow: $dogShadow, $posX $posY 5px rgba(#000, 18%)
 
 .dogView
-  +rectangle(100%, calc(100vh - 121px))
+  +rectangle(100%, 100vh)
   +flexCenter
   .scene
     +rectangle(800px, 600px, 30px)
     +flexCenter
     overflow: hidden
     background: $sceneColor
-    margin-top: -120px
     position: relative
   .desktop
     position: absolute
@@ -99,9 +98,10 @@ $dogShadow: inset -15px -15px 3px darken($dogColor, 10%)
           background: $eyeBallColor
           transform: translate(3px, 3px)
           +insetShadow($eyeBallColor, -5px)
-          animation: eyeBallMove 5s linear
+          animation: eyeBallMove 3s linear
           animation-fill-mode: forwards
           animation-iteration-count: infinite
+          animation-direction: alternate
     .bottomFace
       display: flex
       flex-direction: column
@@ -180,10 +180,8 @@ $dogShadow: inset -15px -15px 3px darken($dogColor, 10%)
       transform: translate(3px, 3px)
     10%
       transform: translate(3px, 3px)
-    50%
-      transform: translate(15px, 3px)
-    60%
+    90%
       transform: translate(15px, 3px)
     100%
-      transform: translate(3px, 3px)
-    
+      transform: translate(15px, 3px)
+   
