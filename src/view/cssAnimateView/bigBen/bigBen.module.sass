@@ -4,22 +4,20 @@
   font-family: 'Caveat', '微軟正黑體'
   letter-spacing: 1px
   // transition: .5s all
-  border: 1px solid #444
+  // border: 1px solid #444
 
-$colorBlueRoofLight: #6fc5ff
-$colorBlueRoofDark: #0058ff
+$colorBrownRoofLight: #604533
+$colorBrownRoofDark: #422E20
 
-$colorGreyLight: #fafaf5
-$colorGreyNormal: #e3e2cf
-$colorGreyDark: #bebdaf
-$colorBackground: #2C2F36
+$colorBuildingLight: #BC8F71
+$colorBuildingNormal: #997153
+$colorBuildingDark: #70513C
 
-$colorShadowBlue: #7cb1ff
-$colorShadowBlueLight: #8dc9fc
+$colorClockBg: #EDEADA
+$colorClockBorder: #dca340
 
-$colorWindowGrey: #534d4d
+$colorBg: #545454
 
-$roofGradient: linear-gradient(150deg, $colorBlueRoofLight, $colorBlueRoofDark)
 $sceneGradient: linear-gradient(#1D2B49, #1A45A0, #e6633c ,#ffdba6)
 
 
@@ -51,25 +49,24 @@ $sceneGradient: linear-gradient(#1D2B49, #1A45A0, #e6633c ,#ffdba6)
   top: 50%
   transform: translate(-50%, -50%)
 
-
-
 .bigBenView
   +bdrsRect(100%, 100vh)
   background: #eee
   +flex
   .test
-    width: 200px
+    width: 300px
     position: absolute
     top: 30px
     left: 30px
     z-index: 999
   .scene
-    +bdrsRect(800px, 600px, 30px)
+    +bdrsRect(800px, 700px, 30px)
     overflow: hidden
     position: relative
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px
     .sky
-      +bdrsRect(400px, 400px, 50%)
-      // +bdrsRect(100%)
+      // +bdrsRect(400px, 400px, 50%)
+      +bdrsRect(100%, 100%)
       background: $sceneGradient
       background-size: 100% 200%
       background-position: 0 300%
@@ -80,19 +77,35 @@ $sceneGradient: linear-gradient(#1D2B49, #1A45A0, #e6633c ,#ffdba6)
       +abPos(30px, 30px)
       font-size: 64px
       opacity: .9
+    .bg
+      position: absolute
+      bottom: 0
+      +flex
+      align-items: flex-end
+      @for $i from 1 through 20
+        .box#{$i}
+          background: $colorBg
+          $sizeX: ((random() * 100px)) + 10px
+          $sizeY: ((random() * 100px)) + 100px
+          +bdrsRect($sizeX, $sizeY)
     .building
       +abPosCenter
       display: flex
       flex-direction: column
       align-items: center
+      margin-top: 30px
       .cross
         +bdrsRect(10px, 3px)
         position: relative
+        background: $colorBrownRoofDark
+        box-shadow: inset -1px 1px 1px darken($colorBrownRoofDark, 20)
         &::after
           display: inline-block
           content: ''
           +bdrsRect(3px, 20px)
           margin-top: -5px
+          background: $colorBrownRoofDark
+          box-shadow: inset -1px 1px 1px darken($colorBrownRoofDark, 20)
       .roof
         position: relative
         .cross1
@@ -104,38 +117,116 @@ $sceneGradient: linear-gradient(#1D2B49, #1A45A0, #e6633c ,#ffdba6)
           display: flex
           .roofWall1
             border-style: solid
-            border-width: 0 0px 120px 75px
-            border-color: transparent transparent #007bff transparent
+            border-width: 0 0px 150px 75px
+            border-color: transparent transparent $colorBrownRoofLight transparent
           .roofWall2
             border-style: solid
-            border-width: 0 37.5px 120px 37.5px
-            border-color: transparent transparent #46525f transparent
+            border-width: 0 37.5px 150px 37.5px
+            border-color: transparent transparent darken($colorBrownRoofLight, 3) transparent
             position: absolute
             transform: translateX(37px)
           .roofWall3
             border-style: solid
-            border-width: 0 75px 120px 0px
-            border-color: transparent transparent #007bff transparent
+            border-width: 0 75px 150px 0px
+            border-color: transparent transparent darken($colorBrownRoofLight, 7) transparent
       .topWall1
-        +bdrsRect(120px, 50px)
+        +bdrsRect(120px, 40px)
+        background: $colorBuildingLight
+        box-shadow: inset -10px 8px 5px darken($colorBuildingLight, 10)
       .topWall2
-        +bdrsRect(160px, 50px)
+        +bdrsRect(160px, 30px)
         position: relative
+        background: $colorBuildingNormal
+        box-shadow: inset -3px 7px 5px darken($colorBuildingNormal, 10)
         &::after
           content: ''
-          +bdrsRect(110%, 15px)
+          +bdrsRect(110%, 5px)
           display: inline-block
           +abPosCenter
-          margin-top: -20px
+          margin-top: -15px
+          background: $colorBrownRoofDark
+          box-shadow: inset -1px 1px 1px darken($colorBrownRoofDark, 20)
         .cross2
           position: absolute
           transform: translate(-10px, -15px)
         .cross3
           position: absolute
-          transform: translate(-10px, -15px)
-          
-        // +bdrsRect(80px, 80px)
-        // border-radius: 50px 50px 0 0
-      
+          right: 0
+          transform: translate(10px, -15px)
+        .rectList
+          +flex
+          +bdrsRect(100%)
+          .rect
+            +bdrsRect(100% / 15, 70%)
+            margin: 0 5px
+            background: $colorBuildingLight
+            box-shadow: inset -3px 3px 5px darken($colorBuildingLight, 10)
+      .centerWall
+        +bdrsRect(190px, 190px, 10px)
+        +flex
+        background: $colorBuildingLight
+        box-shadow: inset -20px -15px 10px darken($colorBuildingLight, 10), 0 3px 10px rgba(#000, 0.3), inset -5px -10px 0px darken($colorBuildingLight, 15)
+        .clock
+          +bdrsRect(150px, 150px, 50%)
+          border: 8px solid $colorClockBorder
+          position: relative
+          background: $colorClockBg
+          box-shadow: 0 0 10px rgba(#000, 0.3), inset -5px 5px 10px darken($colorClockBg, 30), inset -10px 10px 10px darken($colorClockBg, 30)
+          +flex
+          .centerDot
+            +bdrsRect(10px, 10px, 50%)
+            position: relative
+            z-index: 1
+            background: $colorBrownRoofDark
+          .longHand
+            +bdrsRect(5px, 60px, 15px)
+            +abPos
+            transform-origin: 50% 100%
+            top: 8px
+            transform: rotate(0deg)
+            background: $colorBuildingNormal
+            box-shadow: inset -2px 2px 1px darken($colorBuildingNormal, 10), 3px 3px 5px rgba(#000, 0.5)
+          .shorthand
+            +bdrsRect(7px, 40px, 15px)
+            +abPos
+            transform-origin: 50% 100%
+            transform: rotate(145deg)
+            top: 27px
+            background: $colorBrownRoofDark
+            box-shadow: inset -2px 2px 1px darken($colorBrownRoofDark, 10), 3px 3px 5px rgba(#000, 0.5)
+      .bottomWall
+        +bdrsRect(160px, 240px)
+        display: flex
+        position: relative
+        background: $colorBuildingNormal
+        .bottomWall1, .bottomWall3
+          flex: 1
+        .bottomWall1
+          background: $colorBuildingLight
+          box-shadow: inset -2px 2px 3px darken($colorBuildingLight, 10)
+        .bottomWall2
+          flex: 6
+          display: flex
+          background: $colorBuildingNormal
+          box-shadow: inset -80px 10px 40px darken($colorBuildingNormal, 15)
+        .bottomWall3
+          background: $colorBuildingDark
+          box-shadow: inset -2px 2px 3px darken($colorBuildingDark, 10), 0 5px 10px darken($colorBuildingNormal, 15)
+        .decorate
+          +bdrsRect(5px, 90%)
+          margin: 0 5px
+          border-radius: 0 0 10px 10px
+          background: $colorBuildingLight
+          box-shadow: inset 3px 5px 3px darken($colorBuildingLight, 10)
+        &::after, &::before
+          content: ''
+          +bdrsRect(105%, 8px, 15px)
+          +abPos(35%, 50%)
+          transform: translateX(-50%)
+          background: $colorBrownRoofLight
+          box-shadow: inset -10px -3px 3px darken($colorBrownRoofLight, 5), 5px 5px 5px rgba(#000, 0.3)
+        &::before
+          top: 42%
+
 
     
