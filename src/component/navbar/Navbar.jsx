@@ -17,6 +17,9 @@ const linkList = [{
 }, {
   name: '狗狗動畫',
   to: '/dog',
+}, {
+  name: '黑夜切換城市',
+  to: '/city',
 }]
 
 export default function Navbar() {

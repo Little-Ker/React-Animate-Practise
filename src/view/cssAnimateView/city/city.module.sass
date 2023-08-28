@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Margarine&family=Noto+Sans+TC:wght@300;400;500;700&display=swap')
+  
+*, *:before, *:after
+  font-family: 'Caveat', '微軟正黑體'
+  letter-spacing: 1px
+  // transition: .5s all
+  // border: 1px solid #444
+
+$colorBlueRoofLight: #6fc5ff
+$colorBlueRoofDark: #0058ff
+
+$colorGreyLight: #fafaf5
+$colorGreyNormal: #e3e2cf
+$colorGreyDark: #bebdaf
+$colorBackground: #2C2F36
+
+$colorShadowBlue: #7cb1ff
+$colorShadowBlueLight: #8dc9fc
+
+$colorWindowGrey: #534d4d
+
+$roofGradient: linear-gradient(150deg, $colorBlueRoofLight, $colorBlueRoofDark)
+$sceneGradient: linear-gradient(#1D2B49, #1A45A0, #91cdff ,#fff)
+
+
+=flex($j:center, $i:center)
+  display: flex
+  justify-content: $j
+  align-items: $i
+
+=abPos($t:initial, $l:initial, $r:initial, $b:initial)
+  position: absolute
+  top: $t
+  left: $l
+  right: $r
+  bottom: $b
+
+=bdrsRect($w, $h: $w, $bdrs1: 0, $bdrs2: $bdrs1, $bdrs3: $bdrs1, $bdrs4: $bdrs1)
+  width: $w
+  height: $h
+  border-radius: $bdrs1 $bdrs2 $bdrs3 $bdrs4
+
+
+.cityView
+  +bdrsRect(100%, 100vh)
+  background: #eee
+  +flex
+  .scene
+    +bdrsRect(800px, 600px, 30px)
+    background: $sceneGradient
+    background-size: 100% 200%
+    background-position: 0 200%
+    position: relative
+    overflow: hidden
+    box-shadow: 0 0 20px rgba(#000, 0.5)
+    .title
+      color: #fff
+      +abPos(30px, 30px)
+      font-size: 64px
+      opacity: .9
+    .dayText, .nightText
+      font-size: 56px
+      color: #fff
+      +abPos(120px, 30px)
+    .dayText
+      color: #333
+      display: none
+    .sun, .moon
+      +bdrsRect(50px, 50px, 50%)
+      +abPos(140px, 330px)
+    .sun
+      background: #ffd844
+      box-shadow: 0 0 20px rgba(#ffd844, 0.7)
+      top: 700px
+    .moon
+      box-shadow: -15px 15px #fff
+    .starSky
+      +bdrsRect(100%)
+      .star
+        background: #fff
+        +bdrsRect(5px, 5px, 50%)
+        animation: falling 1.6s infinite
+    @for $i from 1 through 30
+      .star#{$i}
+        $posX: ((random() * 100%) - 60%)
+        $posY: random() * 100% + 40%
+        +abPos($posX, $posY)
+        animation-delay: $i * -0.3s !important
+    .building
+      +abPos(initial, initial, 0, 0)
+      filter: brightness(0.5)
+      .house1
+        +abPos(initial, initial, 0, 0)
+        +bdrsRect(220px, 240px)
+        +flex
+        background: $colorGreyLight
+        box-shadow: inset -60px 0  5px $colorGreyNormal, 1px -1px 10px rgba(#000, 0.2)
+        z-index: 2
+        .window
+          +bdrsRect(50px, 100px, 30px)
+          +flex
+          flex-direction: column
+          background: $colorGreyNormal
+          box-shadow: inset 7px 3px $colorGreyDark
+          .circle
+            +bdrsRect(20px, 20px, 50%)
+            margin: 5px 0
+            background: $colorWindowGrey
+      .house2
+        +bdrsRect(260px, 200px)
+        +abPos(initial, initial, 160px, 0)
+        background: $colorGreyLight
+        z-index: 3
+        box-shadow: inset 0 15px $colorShadowBlueLight, inset -100px 0  5px $colorGreyNormal, 1px -1px 10px rgba(#000, 0.2)
+        .door
+          +bdrsRect(50px, 100px, 30px, 30px, 0, 0)
+          +abPos(initial, 60px, initial, 0)
+          background: $colorBackground
+          box-shadow: inset 10px 5px $colorShadowBlue
+      .house3
+        +flex
+        z-index: 1
+        .wall1, .wall2, .wall3
+          +bdrsRect(115px, 360px)
+          flex: 10
+          position: relative
+          &::after
+            content: ''
+            +bdrsRect(105%, 20px)
+            +abPos(0, 50%)
+            transform: translateX(-50%)
+            box-shadow: 0 0 10px rgba(#000, 10%)
+          .window
+            background: $colorBackground
+        .wall1
+          background: $colorGreyLight
+          .window
+            box-shadow: inset 8px 5px $colorShadowBlue
+          &::after
+            background: $colorGreyLight
+        .wall2
+          flex: 14
+          background: $colorGreyNormal
+          z-index: 1
+          .window
+            box-shadow: inset 0 5px $colorShadowBlue
+          &::after
+            background: $colorGreyNormal
+        .wall3
+          background: $colorGreyDark
+          .window
+            box-shadow: inset -8px 5px $colorShadowBlue
+          &::after
+            background: $colorGreyDark
+        .window
+          +bdrsRect(35px, 60px, 30px, 30px, 0, 0)
+          position: relative
+          left: 50%
+          transform: translateX(-50%)
+          margin-top: 35px
+        .roof
+          +bdrsRect(320px, 160px, 160px, 160px, 0, 0)
+          +abPos(-160px, 50%)
+          transform: translateX(-50%)
+          background: $roofGradient
+          box-shadow: inset -30px 0 10px rgba($colorBlueRoofDark, 60%), 30px 0 30px rgba(#000, 40%)
+          .smallRoof
+            +bdrsRect(60px, 30px, 30px, 30px, 0, 0)
+            +abPos(-27px, 50%)
+            transform: translateX(-50%)
+            background: $colorGreyLight
+            box-shadow: inset -10px 0 5px $colorGreyNormal
+            .cross
+              +bdrsRect(7px, 35px)
+              +abPos(-30px, 50%)
+              transform: translateX(-50%)
+              background: $colorGreyLight
+              &::before
+                content: ''
+                +bdrsRect(20px, 5px)
+                +abPos(7px, 50%)
+                transform: translateX(-50%)
+                background: $colorGreyLight
+
+  input:checked+.scene
+    background-position: 0 300%
+    .starSky, .nightText
+      display: none
+    .building
+      filter: brightness(1)
+    .moon
+      top: -150px
+    .title
+      color: #222
+    .dayText
+      display: block
+    .sun
+      top: 150px
+
+@keyframes falling
+  0%, 100%
+    opacity: 0
+  70%
+    opacity: 1
+  0%
+    transform: translate(100px, 0)
+  100%
+    transform: translate(-300px, 300px)
