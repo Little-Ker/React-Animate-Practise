@@ -20,6 +20,9 @@ const linkList = [{
 }, {
   name: '黑夜切換城市',
   to: '/city',
+}, {
+  name: '黑夜切換大笨鐘',
+  to: '/bigBen',
 }]
 
 export default function Navbar() {

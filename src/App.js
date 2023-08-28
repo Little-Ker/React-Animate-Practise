@@ -9,6 +9,7 @@ import ViewB from './view/ViewB'
 import EatCake from './view/cssAnimateView/eatCake'
 import Dog from './view/cssAnimateView/dog'
 import City from './view/cssAnimateView/city'
+import BigBen from './view/cssAnimateView/bigBen'
  
 const RouterPage = () => {
   return (
@@ -19,6 +20,7 @@ const RouterPage = () => {
       <Route exact path="eatCake" element={<EatCake/>} />
       <Route exact path="dog" element={<Dog/>} />
       <Route exact path="city" element={<City/>} />
+      <Route exact path="bigBen" element={<BigBen/>} />
       <Route path="*" element={<ViewA/>} />
     </Routes>
   )

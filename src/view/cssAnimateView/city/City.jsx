@@ -1,10 +1,9 @@
 import React from 'react'
 import clsx from 'clsx'
 import styles from './city.module.sass'
-    
+
 function City() {
   const starAry = [...Array(30).keys()]
-  console.log('starAry',starAry)
 
   return (
     <div className={styles.cityView}>
