@@ -1,22 +1,37 @@
 import React from 'react'
 import clsx from 'clsx'
 import styles from './bigBen.module.sass'
-
-import bigBen from '../../../assets/images/bigBen.svg'
-    
+  
 function BigBen() {
   const topRecAry = [...Array(10).keys()]
   const bottomDecorateAry = [...Array(10).keys()]
-  const boxAry = [...Array(15).keys()]
+  const boxAry = [...Array(20).keys()]
+  const starAry = [...Array(30).keys()]
 
   return (
     <div className={styles.bigBenView}>
-      {/* <img className={styles.test} src={bigBen} alt="" /> */}
       <label htmlFor="checkbox">
         <input type="checkbox" id="checkbox" />
         <div className={styles.scene}>
-          {/* <h1 className={styles.title}>Click Change Sky!</h1> */}
+          <h1 className={styles.title}>Big Ben</h1>
           <div className={styles.sky}></div>
+          <div className={styles.sun}></div>
+          <div className={styles.starSky}>
+            {starAry.map((cur, index) => (
+              <div key={cur} className={clsx(styles.star, styles[`star${index + 1}`])}></div>
+            ))}
+          </div>
+          <div className={styles.moon}></div>
+          <div className={clsx(styles.cloud, styles.cloudGroup1)}>
+            <div className={styles.cloud1}></div>
+            <div className={styles.cloud2}></div>
+            <div className={styles.cloud3}></div>
+          </div>
+          <div className={clsx(styles.cloud, styles.cloudGroup2)}>
+            <div className={styles.cloud1}></div>
+            <div className={styles.cloud2}></div>
+            <div className={styles.cloud3}></div>
+          </div>
           <div className={styles.bg}>
             {boxAry.map((cur, index) => (
               <div key={cur} className={styles[`box${index+1}`]}></div>
