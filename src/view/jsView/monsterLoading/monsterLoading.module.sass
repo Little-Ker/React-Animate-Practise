@@ -1,0 +1,110 @@
+*, *:before, *:after
+  letter-spacing: 1px
+  // transition: .5s all
+  //border: 1px solid #444
+
+$colorOrange: #e55a54
+$colorBlue: #0C4475
+
+=flex($j:center, $i:center)
+  display: flex
+  justify-content: $j
+  align-items: $i
+
+=abPos($t:initial, $l:initial, $r:initial, $b:initial)
+  position: absolute
+  top: $t
+  left: $l
+  right: $r
+  bottom: $b
+
+=bdrsRect($w, $h: $w, $bdrs1: 0, $bdrs2: $bdrs1, $bdrs3: $bdrs1, $bdrs4: $bdrs1)
+  width: $w
+  height: $h
+  border-radius: $bdrs1 $bdrs2 $bdrs3 $bdrs4
+
+=abPosCenter
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+
+.monsterLoading, .loading
+  +bdrsRect(100%, calc(100vh - 160px))
+  background: $colorOrange
+  +flex
+  margin-top: 160px
+  position: relative
+  h1
+    color: #fff
+    margin-top: -3rem
+    margin-right: 1rem
+  .monster
+    +bdrsRect(150px, 150px, 10%)
+    +flex
+    flex-direction: column
+    margin: 1.2rem
+    box-shadow: 0 10px 20px rgba(#000, 0.4)
+    position: relative
+    background: $colorOrange
+    animation: jump .8s infinite alternate
+    .eye
+      +bdrsRect(40%, 40%, 50%)
+      +flex
+      background: #fff
+      .eyeBall
+        +bdrsRect(50%, 50%, 50%)
+        background: $colorBlue
+        animation: eyeMove 1.6s infinite alternate
+    .mouth
+      +bdrsRect(30%, 15px, 20px)
+      margin-top: 1.2rem
+      background: $colorBlue
+    &::after, &::before
+      content: ''
+      +bdrsRect(22%, 8%, 25%)
+      background: #fff
+      +abPosCenter
+      box-shadow: 0 -5px 20px rgba(#000, 0.2)
+    &::after
+      transform: rotate(45deg)
+      top: -12%
+      left: 32%
+    &::before
+      top: -12%
+      left: 45%
+      transform: rotate(-45deg)
+    &.blueMonster
+      background: $colorBlue
+      animation-delay: .8s
+      .eyeBall, .mouth
+        background: $colorOrange
+  .loading
+    position: fixed
+    background: $colorBlue
+    top: 0
+    left: 0
+    flex-direction: column
+    .monster
+      animation: none
+    .loadBar
+      margin-top: 2rem
+      +bdrsRect(30%, 15px, 20px)
+      background: #fff
+      overflow: hidden
+      .bar
+        +bdrsRect(0%, 15px)
+        background: $colorOrange
+
+  @keyframes jump
+    0%
+      transform: translateY(-50%)
+      box-shadow: 0 50px 30px rgba(#000, 0.4) 
+    100%
+      transform: translateY(0)
+      box-shadow: 0 10px 20px rgba(#000, 0.4)
+  @keyframes eyeMove
+    0%
+      transform: translateX(-50%)
+    100%
+      transform: translateX(50%)

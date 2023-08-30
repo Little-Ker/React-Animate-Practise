@@ -26,6 +26,9 @@ const linkList = [{
 }, {
   name: '字串資料處理練習',
   to: '/stringHandle',
+}, {
+  name: '小怪物 loading 頁(GSAP)',
+  to: '/monsterLoading',
 }]
 
 export default function Navbar() {
