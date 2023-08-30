@@ -6,12 +6,6 @@ import {
 } from 'react-router-dom'
 
 const linkList = [{
-  name: 'ViewA',
-  to: '/viewA',
-}, {
-  name: 'ViewB',
-  to: '/viewB',
-}, {
   name: '偷吃蛋糕',
   to: '/eatCake',
 }, {
