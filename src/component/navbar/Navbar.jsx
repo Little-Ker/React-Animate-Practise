@@ -23,6 +23,9 @@ const linkList = [{
 }, {
   name: '黑夜切換大笨鐘',
   to: '/bigBen',
+}, {
+  name: '字串資料處理練習',
+  to: '/stringHandle',
 }]
 
 export default function Navbar() {
