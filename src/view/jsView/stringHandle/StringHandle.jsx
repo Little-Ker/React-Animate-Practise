@@ -75,8 +75,8 @@ function StringHandle() {
 
     return (
       <div className={styles.memberList}>
-        {memberList.map(cur => (
-          <div key={cur} className={styles.member}>
+        {memberList.map((cur, index) => (
+          <div key={index} className={styles.member}>
             <div>{`名字：${cur.name}`}</div>
             <div>{`日期：${cur.date}`}</div>
             <div>{`評論：${cur.content}`}</div>
@@ -88,12 +88,10 @@ function StringHandle() {
 
   return (
     <div className={styles.stringHandle}>
-      <div>
-        <h1 className={styles.title}>字串 處理成 物件格式</h1>
-        <BookData />
-        <h1 className={styles.title}>html字串 處理成 物件格式(正規表達式)</h1>
-        <HtmlData />
-      </div>
+      <h1 className={styles.title}>字串 處理成 物件格式</h1>
+      <BookData />
+      <h1 className={styles.title}>html字串 處理成 物件格式(正規表達式)</h1>
+      <HtmlData />
     </div> 
   )
 }
