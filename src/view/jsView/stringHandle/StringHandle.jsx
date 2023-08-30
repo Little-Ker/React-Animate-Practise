@@ -88,9 +88,10 @@ function StringHandle() {
 
   return (
     <div className={styles.stringHandle}>
-      <h1>字串資料處理(正規表達式)</h1>
       <div>
+        <h1 className={styles.title}>字串 處理成 物件格式</h1>
         <BookData />
+        <h1 className={styles.title}>html字串 處理成 物件格式(正規表達式)</h1>
         <HtmlData />
       </div>
     </div> 
