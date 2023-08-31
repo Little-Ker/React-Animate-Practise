@@ -10,6 +10,7 @@ import City from './view/cssAnimateView/city'
 import BigBen from './view/cssAnimateView/bigBen'
 import StringHandle from './view/jsView/stringHandle'
 import MonsterLoading from './view/jsView/monsterLoading'
+import MorseCode from './view/jsView/morseCode'
  
 const RouterPage = () => {
   return (
@@ -21,6 +22,7 @@ const RouterPage = () => {
       <Route exact path="bigBen" element={<BigBen/>} />
       <Route exact path="stringHandle" element={<StringHandle/>} />
       <Route exact path="monsterLoading" element={<MonsterLoading/>} />
+      <Route exact path="morseCode" element={<MorseCode/>} />
       <Route path="*" element={<EatCake/>} />
     </Routes>
   )

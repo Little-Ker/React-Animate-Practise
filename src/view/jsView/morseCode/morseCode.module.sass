@@ -1,0 +1,114 @@
+*, *:before, *:after
+  letter-spacing: 1px
+  // transition: .5s all
+  //border: 1px solid #444
+
+$mainColor: #6b6853
+$subColor: #cec8a1
+$whiteColor: #fafafa
+
+=flex($j:center, $i:center)
+  display: flex
+  justify-content: $j
+  align-items: $i
+
+=abPos($t:initial, $l:initial, $r:initial, $b:initial)
+  position: absolute
+  top: $t
+  left: $l
+  right: $r
+  bottom: $b
+
+=bdrsRect($w, $h: $w, $bdrs1: 0, $bdrs2: $bdrs1, $bdrs3: $bdrs1, $bdrs4: $bdrs1)
+  width: $w
+  height: $h
+  border-radius: $bdrs1 $bdrs2 $bdrs3 $bdrs4
+
+=abPosCenter
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+.morseCode
+  margin-top: 10rem
+  background: $subColor
+  padding: 2.5rem
+  +bdrsRect(100%, calc(100vh - 160px))
+  +flex
+  position: relative
+  overflow: hidden
+  .bgText
+    position: absolute
+    font-size: 320px
+    font-weight: bold
+    color: $whiteColor
+    opacity: .3
+    &.topText
+      top: -12%
+      left: -40px
+    &.bottomText
+      bottom: -10%
+      right: -40px
+  .paper
+    padding: 2rem 3rem
+    background: $whiteColor
+    border-radius: 10px
+    box-shadow: 0 0 10px rgba(#000, .3)
+    height: 600px
+    position: relative
+    .title
+      color: darken($mainColor, 10)
+      letter-spacing: 2px
+      font-size: 24px
+      margin-bottom: 2rem
+    .inputTitle
+      text-align: left
+      margin-bottom: .2rem
+      color: $mainColor
+    textarea
+      padding: 1rem
+      border: 2px solid $mainColor
+      color: $mainColor
+    .label
+      font-size: 24px
+      color: $mainColor
+      font-weight: bolde
+      margin-top: .5rem
+    .code
+      margin: 1.5rem 0
+    .buttonList
+      margin-top: 1.5rem
+      button
+        border-radius: 0
+        border: 2px solid $mainColor
+        padding: .5rem 1rem
+        margin: 0 .3rem
+        color: $mainColor
+        font-weight: bold
+        cursor: pointer
+        transition: .3s all
+        &:hover
+          opacity: .8
+      .mainColor
+        background: $mainColor
+        color: $whiteColor
+      .subColor
+        background: darken($subColor, 20) 
+        color: darken($mainColor, 20)
+        font-weight: bold
+    hr
+      margin-top: 1rem
+      border-color: $whiteColor
+      opacity: .3
+    .list
+      display: flex
+      flex-direction: column
+      flex-wrap: wrap
+      height: 520px
+      li
+        text-align: left
+        margin: 1rem
+    &.rightPaper
+      background: $mainColor
+      padding: 2rem
+      color: $whiteColor

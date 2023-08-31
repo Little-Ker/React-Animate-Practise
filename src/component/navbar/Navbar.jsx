@@ -23,6 +23,9 @@ const linkList = [{
 }, {
   name: '小怪物 loading 頁(GSAP)',
   to: '/monsterLoading',
+}, {
+  name: '摩斯密碼',
+  to: '/morseCode',
 }]
 
 export default function Navbar() {
