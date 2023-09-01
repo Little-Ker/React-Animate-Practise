@@ -26,6 +26,9 @@ const linkList = [{
 }, {
   name: '摩斯密碼',
   to: '/morseCode',
+}, {
+  name: 'webSocket 聊天室',
+  to: '/webSocketChat',
 }]
 
 export default function Navbar() {
