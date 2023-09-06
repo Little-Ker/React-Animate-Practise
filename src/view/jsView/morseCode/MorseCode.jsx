@@ -1,11 +1,18 @@
 import React, {
-  useCallback, useMemo, useState 
+  useCallback, useEffect, useMemo, useState 
 } from 'react'
 import clsx from 'clsx'
 import gsap from 'gsap'
+import short from '../../../assets/music/short.mp3'
+import long from '../../../assets/music/long.mp3'
 import styles from './morseCode.module.sass'
   
 function MorseCode() {
+  const shortAudio = new Audio(short)
+  const longAudio = new Audio(long)
+
+  const [isPlaying, setIsPlaying] = useState(false)
+
   const morseCodeList = useMemo(() => {
     const morseCode = 'A;.-|B;-...|C;-.-.|D;-..|E;.|F;..-.|G;--.|H;....|I;..|J;.---|K;-.-|L;.-..|M;--|N;-.|O;---|P;.--.|Q;--.-|R;.-.|S;...|T;-|U;..-|V;...-|W;.--|X;-..-|Y;-.--|Z;--..|/;-..-.|1;.----|2;..---|3;...--|4;....-|5;.....|6;-....|7;--...|8;---..|9;----.|0;-----'
     return morseCode.split('|').map((cur) => {
@@ -13,8 +20,11 @@ function MorseCode() {
       return codeSpilt
     })
   }, [])
-  console.log('morseCodeList',morseCodeList)
 
+  useEffect(() => {
+    console.log('morseCodeList',morseCodeList)
+  }, [morseCodeList])
+ 
   const [inputEng, setInputEng] = useState('')
   const [inputMorse, setInputMorse] = useState('')
 
@@ -37,9 +47,7 @@ function MorseCode() {
 
   const onTranslateMorse = useCallback(() => {
     const translate = inputEng.toUpperCase().replace(/\s*/g, '').split('').map((cur) => {
-      const findCode =  morseCodeList.find((letter) => {
-        return cur === letter[0]
-      })
+      const findCode =  morseCodeList.find(letter => (cur === letter[0]))
       if (findCode) return findCode[1]
       return cur
     }).join(' ')
@@ -58,6 +66,35 @@ function MorseCode() {
     setInputEng(translate)
     changeBgColorAnim('#inputEng')
   }, [inputMorse, morseCodeList])
+
+  const onPlayAudioFn = useCallback((textAry, nowIndex) => {
+    if (isPlaying) return
+    setIsPlaying(true)
+
+    const text = textAry[nowIndex]
+    let time = 500
+
+    switch (text) {
+    case '-':
+      longAudio.play()
+      break
+    case '.':
+      shortAudio.play()
+      time = 300
+      break
+    default:
+      time = 1000
+      break
+    }
+
+    if (textAry.length > nowIndex) {
+      setTimeout(() => {
+        onPlayAudioFn(textAry, nowIndex + 1)
+      }, time)
+      return
+    }
+    setIsPlaying(false)
+  }, [isPlaying])
 
   return (
     <div className={styles.morseCode}>
@@ -80,11 +117,10 @@ function MorseCode() {
           value={inputMorse}
           onChange={e => setInputMorse(e.target.value)}
         ></textarea>
-        <div className={styles.code}>1111</div>
         <div className={styles.buttonList}>
           <button onClick={onTranslateMorse} className={styles.mainColor}>{'翻譯成密碼'}</button>
           <button onClick={onTranslateEng} className={styles.subColor}>{'翻譯回英文'}</button>
-          <button className={styles.whiteColor}>{'播放'}</button>
+          <button onClick={() => onPlayAudioFn(inputMorse, 0)} disabled={isPlaying} className={clsx(styles.whiteColor, isPlaying && styles.disableBtn)}>{'播放'}</button>
         </div>
       </div>
       <div className={clsx(styles.paper, styles.rightPaper)}>
