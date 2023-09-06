@@ -3,10 +3,12 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import styles from './chat.module.sass'
+import DisconnectTip from '../disconnectTip'
 import clsx from 'clsx'
       
 const Chat = (props) => {
-  const { socket, setIsLoadingSuc, allMessage, name } = props
+  const { socket, setIsLoadingSuc, allMessage, name, setAllMessage } = props
+  const [isShowTip, setIsShowTip] = useState(false)
   const [message, setMessage] = useState('')
 
   // 訊息變多 bar 要滾動
@@ -18,13 +20,27 @@ const Chat = (props) => {
     })
   }, [allMessage])
 
+  useEffect(() => {
+    setAllMessage([])
+  }, [])
+
   const leaveChatFn = useCallback(() => {
-    socket?.disconnect()
+    if (!socket || !socket?.connected) return
+    const newUserMessage = {
+      id: 'tip',
+      message: `${name}已離開聊天室`,
+    }
     setIsLoadingSuc(false)
+    socket.emit('sendMessage', newUserMessage)
+    socket.emit('removeUserResponse', socket.id)
   }, [socket])
 
   const sendMessageFn = useCallback(() => {
-    if (socket && message !== '') {
+    if (!socket?.connected) {
+      setIsShowTip(true)
+      return
+    }
+    if (message.trim() !== '') {
       const messageData = {
         id: socket.id,
         message: message,
@@ -32,6 +48,7 @@ const Chat = (props) => {
       }
       socket.emit('sendMessage', messageData)
       setMessage('')
+      return
     }
   }, [message, socket])
   
@@ -47,9 +64,9 @@ const Chat = (props) => {
             return (<div key={index} className={clsx(styles.dialog, styles.myselfBox)}>
               <p className={styles.chat}>{cur.message}</p>
             </div>)
-          } else if (cur.id === 'tip') {
+          } else if (cur.id === 'tip') { // 系統提示字
             return (<p key={index} className={styles.tip}>{cur.message}</p>)
-          }  else {
+          }  else { // 別人的訊息(有頭像)
             return (<div key={index} className={clsx(styles.dialog, styles.otherBox)}>
               <div className={styles.photo}>{cur.name}</div>
               <p className={styles.chat}>{cur.message}</p>
@@ -66,6 +83,10 @@ const Chat = (props) => {
         />
         <button onClick={sendMessageFn}>{'傳送訊息'}</button>
       </div>
+      <DisconnectTip
+        isShowTip={isShowTip}
+        setIsShowTip={setIsShowTip}
+      />
     </div>
   )
 }
@@ -75,6 +96,7 @@ Chat.propTypes = {
   setIsLoadingSuc: PropTypes.func,
   allMessage: PropTypes.array,
   name: PropTypes.string,
+  setAllMessage: PropTypes.func,
 }
     
 Chat.defaultProps = {
@@ -82,6 +104,7 @@ Chat.defaultProps = {
   setIsLoadingSuc: () => {},
   allMessage: [],
   name: '',
+  setAllMessage: () => {},
 }
       
 export default Chat

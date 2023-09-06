@@ -6,9 +6,10 @@ const { Server } = require('socket.io')
 const app = express()
 const server = http.createServer(app)
 
+// 根據開啟的網頁位置調整跨域
 const socketIO = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:3001',
   },
 })
 
@@ -35,10 +36,20 @@ socketIO.on('connection', (socket) => {
   })
 
   // 新用戶加入
-  socket.on('newUserResponse', (data) => {
+  socket.on('userResponse', (data) => {
     users.push(data)
     console.log('USERdata',users)
-    socketIO.emit('newUserResponse', users)
+    socketIO.emit('userResponse', users)
+  })
+
+  // 移除用戶
+  socket.on('removeUserResponse', (userId) => {
+    let findPos = -1 
+    users.forEach((cur, index) => {
+      if (cur.id === userId) findPos = index
+    })
+    if (findPos !== -1) users.splice(findPos, 1)
+    socketIO.emit('userResponse', users)
   })
 })
 
