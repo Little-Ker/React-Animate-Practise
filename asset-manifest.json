@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/React-Animate-Practise/static/css/main.fde8db8f.css",
-    "main.js": "/React-Animate-Practise/static/js/main.2abfc728.js",
+    "main.css": "/React-Animate-Practise/static/css/main.f59c9ccb.css",
+    "main.js": "/React-Animate-Practise/static/js/main.a5405a2d.js",
     "static/js/787.44efd7d6.chunk.js": "/React-Animate-Practise/static/js/787.44efd7d6.chunk.js",
+    "static/media/long.mp3": "/React-Animate-Practise/static/media/long.4e602319880fb34677c6.mp3",
+    "static/media/short.mp3": "/React-Animate-Practise/static/media/short.b1b3c049b556edcca06b.mp3",
     "index.html": "/React-Animate-Practise/index.html",
-    "main.fde8db8f.css.map": "/React-Animate-Practise/static/css/main.fde8db8f.css.map",
-    "main.2abfc728.js.map": "/React-Animate-Practise/static/js/main.2abfc728.js.map",
+    "main.f59c9ccb.css.map": "/React-Animate-Practise/static/css/main.f59c9ccb.css.map",
+    "main.a5405a2d.js.map": "/React-Animate-Practise/static/js/main.a5405a2d.js.map",
     "787.44efd7d6.chunk.js.map": "/React-Animate-Practise/static/js/787.44efd7d6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fde8db8f.css",
-    "static/js/main.2abfc728.js"
+    "static/css/main.f59c9ccb.css",
+    "static/js/main.a5405a2d.js"
   ]
 }
