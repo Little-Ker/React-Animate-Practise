@@ -23,7 +23,8 @@
     "redux": "^4.2.0",
     "sass": "^1.52.2",
     "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.2"
+    "socket.io-client": "^4.7.2",
+    "web-vitals": "^3.4.0"
   },
   "scripts": {
     "predeploy": "npm run build",
