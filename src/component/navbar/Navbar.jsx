@@ -29,6 +29,9 @@ const linkList = [{
 }, {
   name: 'webSocket 聊天室',
   to: '/webSocketChat',
+}, {
+  name: '購物清單',
+  to: '/shoppingOrder',
 }]
 
 export default function Navbar() {

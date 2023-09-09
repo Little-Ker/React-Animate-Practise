@@ -1,0 +1,90 @@
+
+$blackColor: #303030
+$grayColor: #AEACAF
+$lightGrayColor: #f1f1f1
+    
+.order
+  display: flex
+  flex-direction: column
+  align-items: center
+  letter-spacing: 1px
+  min-height: 400px
+  max-height: 400px
+  overflow: auto
+  padding: 0 2rem
+  img
+    width: 220px
+  .choose
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: 100%
+    margin: .3rem 0
+    .title
+      margin-right: 1rem
+      min-width: 25px
+    .radioBtn
+      display: flex
+      align-items: center
+      padding-right: 1rem  
+  input
+    padding: .3rem
+    margin: .5rem 0
+    border-radius: 0
+  .select
+    width: 80%
+    letter-spacing: 1px
+    position: relative
+    select
+      width: 100%
+      padding: .5rem
+      font-family: '微軟正黑體'
+      font-size: 14px
+      cursor: pointer
+    &::before
+      position: absolute
+      content: ""
+      top: 18px
+      right: 10px
+      width: 0
+      height: 0
+      border: 6px solid transparent
+      border-color: #333 transparent transparent transparent
+  select, input[type='radio'], input[type='number']
+    appearance: none
+    border: 1px solid $blackColor
+  input[type='radio']
+    width: 15px
+    height: 15px
+    border: 1px solid #333
+    border-radius: 50%
+    margin-right: .5rem
+    cursor: pointer
+    &:checked
+      background: #333
+  .numInput
+    width: 180px
+    text-align: center
+    appearance: textfield
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button
+      appearance: none
+  .numBtn
+    width: 34px
+    height: 34px
+    background: $blackColor
+    color: #fff
+    font-weight: bold
+    font-size: 18px
+    display: flex
+    justify-content: center
+    align-items: center
+    border: none
+    cursor: pointer
+    &.disabledBtn
+      background: lighten($blackColor, 20%)
+      cursor: default
+  .numberTip
+    text-align: right
+    width: 100%
+    font-size: 14px
+    color: #d81010

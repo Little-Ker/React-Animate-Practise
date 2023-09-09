@@ -12,6 +12,7 @@ import StringHandle from './view/jsView/stringHandle'
 import MonsterLoading from './view/jsView/monsterLoading'
 import MorseCode from './view/jsView/morseCode'
 import WebSocketChat from './view/jsView/webSocketChat'
+import ShoppingOrder from './view/jsView/shoppingOrder'
  
 const RouterPage = () => {
   return (
@@ -25,6 +26,7 @@ const RouterPage = () => {
       <Route exact path="monsterLoading" element={<MonsterLoading/>} />
       <Route exact path="morseCode" element={<MorseCode/>} />
       <Route exact path="webSocketChat" element={<WebSocketChat/>} />
+      <Route exact path="shoppingOrder" element={<ShoppingOrder/>} />
       <Route path="*" element={<EatCake/>} />
     </Routes>
   )

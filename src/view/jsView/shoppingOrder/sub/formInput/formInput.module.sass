@@ -1,0 +1,81 @@
+
+$blackColor: #303030
+$grayColor: #AEACAF
+$lightGrayColor: #f1f1f1
+    
+.formInput
+  display: flex
+  flex-direction: column
+  align-items: center
+  letter-spacing: 1px
+  min-height: 400px
+  max-height: 400px
+  overflow: auto
+  padding: 0 2rem
+  .product
+    padding: 0 1.5rem
+    display: flex
+    align-items: center
+    justify-content: space-between
+    border: 1px solid lighten($blackColor, 60%)
+    text-align: left
+    border-radius: 10px
+    box-shadow: 0 0 10px rgba(#000, 0.2)
+    margin-top: .5rem
+    margin-bottom: 2rem
+    img
+      width: 120px
+      margin-right: 1.5rem
+    .detail
+      width: 100%
+      .flex
+        display: flex
+        justify-content: space-between
+        align-items: center
+        margin-top: 1rem
+        .size
+          background: $blackColor
+          color: #fff
+          padding: .1rem .5rem
+          border-radius: 5px
+          line-height: 1.4
+          font-size: 12px
+  .choose
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: 100%
+    margin-bottom: 1rem
+    border: 1px solid #aaa
+    padding: 0 1rem
+    .title
+      margin-right: 1rem
+      min-width: 25px
+      position: relative
+      &::before
+        content: ''
+        position: absolute
+        height: 100%
+        width: 1px
+        background: #aaa
+        right: -10px
+    .radioBtn
+      display: flex
+      align-items: center
+      padding: .5rem 0
+      padding-right: 1rem
+  input
+    padding: .5rem
+    border-radius: 0
+    border: none
+  input[type='radio']
+    appearance: none
+    width: 15px
+    height: 15px
+    border: 1px solid #333
+    border-radius: 50%
+    margin-right: .5rem
+    
+    cursor: pointer
+    &:checked
+      background: #333
