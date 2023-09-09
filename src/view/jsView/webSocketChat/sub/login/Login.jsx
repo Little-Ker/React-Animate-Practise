@@ -11,8 +11,7 @@ const Login = (props) => {
 
   const onEnterChat = useCallback(() => {
     if (!socket || !socket?.connected) {
-      setTip('*連線失敗⍰')
-      setIsLoadingSuc(true)
+      setTip('*連線失敗')
       return 
     }
     setTip('')
