@@ -32,6 +32,9 @@ const linkList = [{
 }, {
   name: '購物清單',
   to: '/shoppingOrder',
+}, {
+  name: 'canvas 城堡',
+  to: '/castleAnim',
 }]
 
 export default function Navbar() {
