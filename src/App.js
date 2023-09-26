@@ -14,6 +14,7 @@ import MorseCode from './view/jsView/morseCode'
 import WebSocketChat from './view/jsView/webSocketChat'
 import ShoppingOrder from './view/jsView/shoppingOrder'
 import CastleAnim from './view/canvas/castleAnim'
+import Coordinate from './view/canvas/coordinate'
  
 const RouterPage = () => {
   return (
@@ -29,6 +30,7 @@ const RouterPage = () => {
       <Route exact path="webSocketChat" element={<WebSocketChat/>} />
       <Route exact path="shoppingOrder" element={<ShoppingOrder/>} />
       <Route exact path="castleAnim" element={<CastleAnim/>} />
+      <Route exact path="coordinate" element={<Coordinate/>} />
       <Route path="*" element={<EatCake/>} />
     </Routes>
   )

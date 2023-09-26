@@ -35,6 +35,9 @@ const linkList = [{
 }, {
   name: 'canvas 城堡',
   to: '/castleAnim',
+}, {
+  name: '九宮格畫布座標',
+  to: '/coordinate',
 }]
 
 export default function Navbar() {
