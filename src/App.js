@@ -3,18 +3,19 @@ import {
   HashRouter as Router, Route, Routes 
 } from 'react-router-dom'
 import './App.css'
-import Navbar from './component/navbar/Navbar'
-import EatCake from './view/cssAnimateView/eatCake'
-import Dog from './view/cssAnimateView/dog'
-import City from './view/cssAnimateView/city'
-import BigBen from './view/cssAnimateView/bigBen'
-import StringHandle from './view/jsView/stringHandle'
-import MonsterLoading from './view/jsView/monsterLoading'
-import MorseCode from './view/jsView/morseCode'
-import WebSocketChat from './view/jsView/webSocketChat'
-import ShoppingOrder from './view/jsView/shoppingOrder'
-import CastleAnim from './view/canvas/castleAnim'
-import Coordinate from './view/canvas/coordinate'
+import Navbar from 'component/navbar/Navbar'
+import EatCake from 'view/cssAnimateView/eatCake'
+import Dog from 'view/cssAnimateView/dog'
+import City from 'view/cssAnimateView/city'
+import BigBen from 'view/cssAnimateView/bigBen'
+import StringHandle from 'view/jsView/stringHandle'
+import MonsterLoading from 'view/jsView/monsterLoading'
+import MorseCode from 'view/jsView/morseCode'
+import WebSocketChat from 'view/jsView/webSocketChat'
+import ShoppingOrder from 'view/jsView/shoppingOrder'
+import CastleAnim from 'view/canvas/castleAnim'
+import Coordinate from 'view/canvas/coordinate'
+import Ball from 'view/canvas/ball'
  
 const RouterPage = () => {
   return (
@@ -31,6 +32,7 @@ const RouterPage = () => {
       <Route exact path="shoppingOrder" element={<ShoppingOrder/>} />
       <Route exact path="castleAnim" element={<CastleAnim/>} />
       <Route exact path="coordinate" element={<Coordinate/>} />
+      <Route exact path="ball" element={<Ball/>} />
       <Route path="*" element={<EatCake/>} />
     </Routes>
   )
