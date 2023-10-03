@@ -38,6 +38,9 @@ const linkList = [{
 }, {
   name: '九宮格畫布座標',
   to: '/coordinate',
+}, {
+  name: '物理球效果',
+  to: '/ball',
 }]
 
 export default function Navbar() {
