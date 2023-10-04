@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600&display=swap')
+
+.snake
+  width: 100%
+  height: 100vh
+  display: flex
+  justify-content: center
+  align-items: center
+  background: #eee
+  flex-direction: column
+  position: relative
+  font-family: 'Pixelify Sans', cursive
+  canvas
+    background: #000
+    max-width: 100%
+    border: 5px solid #000
+  .panel
+    position: absolute
+  .title
+    color: #fff
+    font-weight: 600
+    font-size: 36px
+    letter-spacing: 5px
+    text-shadow: black 0.1em 0.1em 0.2em
+    margin-bottom: 20px
+  .button, .arrButton
+    box-shadow: rgba(black, 0.3) 0.1em 0.1em 0.2em
+    cursor: pointer
+    border-radius: 10px
+    &:hover
+      background: #aaaaaa
+  .button
+    padding: .6rem 1.2rem
+    font-size: 20px
+    margin-bottom: 100px
+  .arrBtnGroup
+    margin-top: .5rem
+    .arrButton
+      width: 50px
+      height: 50px
+      margin: .3rem

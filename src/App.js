@@ -16,6 +16,7 @@ import ShoppingOrder from 'view/jsView/shoppingOrder'
 import CastleAnim from 'view/canvas/castleAnim'
 import Coordinate from 'view/canvas/coordinate'
 import Ball from 'view/canvas/ball'
+import Snake from 'view/canvas/snake'
  
 const RouterPage = () => {
   return (
@@ -33,6 +34,7 @@ const RouterPage = () => {
       <Route exact path="castleAnim" element={<CastleAnim/>} />
       <Route exact path="coordinate" element={<Coordinate/>} />
       <Route exact path="ball" element={<Ball/>} />
+      <Route exact path="snake" element={<Snake/>} />
       <Route path="*" element={<EatCake/>} />
     </Routes>
   )

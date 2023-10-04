@@ -41,6 +41,9 @@ const linkList = [{
 }, {
   name: '物理球效果',
   to: '/ball',
+}, {
+  name: '貪吃蛇遊戲',
+  to: '/snake',
 }]
 
 export default function Navbar() {
