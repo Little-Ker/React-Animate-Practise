@@ -1,5 +1,5 @@
 .navbar
-    padding: 50px
+    padding: 40px
     position: fixed
     top: 0
     left: 0
@@ -15,3 +15,17 @@
         padding-bottom: .3rem
         &.active
             border-bottom: 2px solid #999
+    .slide
+        min-height: 40px
+    .swiperButton
+        position: absolute
+        left: 20px
+        top: 40px
+        transition: .3s all
+        width: 30px
+        &.swiperNextBtn
+            left: auto
+            right: 20px
+            transform: rotate(180deg)
+        &:hover
+            opacity: .7
