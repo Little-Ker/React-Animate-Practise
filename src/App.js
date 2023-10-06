@@ -17,6 +17,7 @@ import CastleAnim from 'view/canvas/castleAnim'
 import Coordinate from 'view/canvas/coordinate'
 import Ball from 'view/canvas/ball'
 import Snake from 'view/canvas/snake'
+import Particles from 'view/canvas/particles'
  
 const RouterPage = () => {
   return (
@@ -35,6 +36,7 @@ const RouterPage = () => {
       <Route exact path="coordinate" element={<Coordinate/>} />
       <Route exact path="ball" element={<Ball/>} />
       <Route exact path="snake" element={<Snake/>} />
+      <Route exact path="particles" element={<Particles/>} />
       <Route path="*" element={<EatCake/>} />
     </Routes>
   )

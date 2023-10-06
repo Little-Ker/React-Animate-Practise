@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useEffect, useState
+  useEffect, useState
 } from 'react'
 import clsx from 'clsx'
 import styles from './navbar.module.sass'
@@ -57,13 +57,13 @@ const linkList = [{
 }, {
   name: '貪吃蛇遊戲',
   to: '/snake',
+}, {
+  name: '粒子系統',
+  to: '/particles',
 }]
 
 export default function Navbar() {
   const location = useLocation()
-
-  console.log('location.pathname',location.pathname)
-
   const [swiper, setSwiper] = useState(null)
 
   useEffect(() => {
@@ -82,7 +82,6 @@ export default function Navbar() {
     <div className={styles.navbar}>
       <Swiper
         onSwiper={setSwiper}
-        slidesPerView={1}
         spaceBetween={10}
         pagination={{
           clickable: true,
