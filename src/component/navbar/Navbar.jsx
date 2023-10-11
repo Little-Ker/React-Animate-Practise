@@ -60,6 +60,9 @@ const linkList = [{
 }, {
   name: '粒子系統',
   to: '/particles',
+}, {
+  name: '科幻風時鐘',
+  to: '/scienceWeb',
 }]
 
 export default function Navbar() {
