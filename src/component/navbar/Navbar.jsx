@@ -63,6 +63,9 @@ const linkList = [{
 }, {
   name: '科幻風時鐘',
   to: '/scienceWeb',
+}, {
+  name: '聖誕樹',
+  to: '/christmasTree',
 }]
 
 export default function Navbar() {
