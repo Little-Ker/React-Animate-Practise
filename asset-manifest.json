@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/React-Animate-Practise/static/css/main.0e38b799.css",
-    "main.js": "/React-Animate-Practise/static/js/main.79bb9575.js",
+    "main.css": "/React-Animate-Practise/static/css/main.b68cbb1e.css",
+    "main.js": "/React-Animate-Practise/static/js/main.f90f7ba5.js",
     "static/js/496.2f3614c5.chunk.js": "/React-Animate-Practise/static/js/496.2f3614c5.chunk.js",
     "static/media/shoe2.jpg": "/React-Animate-Practise/static/media/shoe2.b8277320e7999782abbc.jpg",
     "static/media/shoe1.jpg": "/React-Animate-Practise/static/media/shoe1.5ef19ae67fdcad8887b5.jpg",
@@ -9,12 +9,12 @@
     "static/media/long.mp3": "/React-Animate-Practise/static/media/long.4e602319880fb34677c6.mp3",
     "static/media/short.mp3": "/React-Animate-Practise/static/media/short.b1b3c049b556edcca06b.mp3",
     "index.html": "/React-Animate-Practise/index.html",
-    "main.0e38b799.css.map": "/React-Animate-Practise/static/css/main.0e38b799.css.map",
-    "main.79bb9575.js.map": "/React-Animate-Practise/static/js/main.79bb9575.js.map",
+    "main.b68cbb1e.css.map": "/React-Animate-Practise/static/css/main.b68cbb1e.css.map",
+    "main.f90f7ba5.js.map": "/React-Animate-Practise/static/js/main.f90f7ba5.js.map",
     "496.2f3614c5.chunk.js.map": "/React-Animate-Practise/static/js/496.2f3614c5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0e38b799.css",
-    "static/js/main.79bb9575.js"
+    "static/css/main.b68cbb1e.css",
+    "static/js/main.f90f7ba5.js"
   ]
 }
