@@ -20,6 +20,7 @@ import Snake from 'view/canvas/snake'
 import Particles from 'view/canvas/particles'
 import ScienceWeb from 'view/canvas/scienceWeb'
 import ChristmasTree from 'view/canvas/christmasTree'
+import AgarIo from 'view/canvas/agarIo'
  
 const RouterPage = () => {
   return (
@@ -41,6 +42,7 @@ const RouterPage = () => {
       <Route exact path="particles" element={<Particles/>} />
       <Route exact path="scienceWeb" element={<ScienceWeb/>} />
       <Route exact path="christmasTree" element={<ChristmasTree/>} />
+      <Route exact path="agarIo" element={<AgarIo/>} />
       <Route path="*" element={<EatCake/>} />
     </Routes>
   )

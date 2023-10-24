@@ -66,6 +66,9 @@ const linkList = [{
 }, {
   name: '聖誕樹',
   to: '/christmasTree',
+}, {
+  name: 'Agar.io',
+  to: '/agarIo',
 }]
 
 export default function Navbar() {
