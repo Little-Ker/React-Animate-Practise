@@ -26,9 +26,8 @@ const AgarIo = () => {
     scale: 1,
     width: 4000,
     height: 4000,
-    foodMax: 200,
+    foodMax: 500,
     playerMax: 50,
-    collideFactor: 0, // 0: 合併  1: 分開
     FPS: 30,
 
     players: [],
@@ -63,26 +62,31 @@ const AgarIo = () => {
     canvas.height = wh
   })
 
+  const playerMove = (player, delta) => {
+    let posDelta = delta
+
+    if (abs(delta.x) > player.getMaxSpeed()) {
+      posDelta = {
+        ...posDelta,
+        x: Math.sign(posDelta.x) * player.getMaxSpeed(),
+      }
+    }
+    if (abs(posDelta.y) > player?.getMaxSpeed()) {
+      posDelta = {
+        ...posDelta,
+        y: Math.sign(posDelta.y) * player.getMaxSpeed(),
+      }
+    }
+    player.speed = posDelta
+  }
+
   const myPlayerMove = () => {
     const myPlayer = globalControl.myPlayers[0]
     let mouseDelta = {
       x: ((mousePos.x - ww/2) * 0.1),
       y: ((mousePos.y - wh/2) * 0.1),
     }
-
-    if (abs(mouseDelta.x) > myPlayer.getMaxSpeed()) {
-      mouseDelta = {
-        ...mouseDelta,
-        x: Math.sign(mouseDelta.x) * myPlayer.getMaxSpeed(),
-      }
-    }
-    if (abs(mouseDelta.y) > myPlayer?.getMaxSpeed()) {
-      mouseDelta = {
-        ...mouseDelta,
-        y: Math.sign(mouseDelta.y) * myPlayer.getMaxSpeed(),
-      }
-    }
-    myPlayer.speed = mouseDelta
+    playerMove(myPlayer, mouseDelta)
   }
 
   const playerMoveCheckBoundary = (playerData) => {
@@ -110,29 +114,74 @@ const AgarIo = () => {
     const type = playerData.type
     const weight = playerData.weight
     const living = playerData.living
+    const lastTarget = playerData.lastTarget
+    const getAwayTarget = playerData.getAwayTarget
 
     globalControl.players[index].pos = {
       x: pos.x + speed.x,
       y: pos.y + speed.y,
     }
 
-    // globalControl.players[index].speed = {
-    //   x: speed.x * 0.98,
-    //   y: speed.y * 0.98,
-    // }
-  
     // 球球移動控制
     myPlayerMove()
     // 玩家移動邊界
     playerMoveCheckBoundary(playerData)
-
+    const player =  globalControl.players[index]
     if (living) {
+      // 敵人AI
+      if(((time.current + id * 5) % 20) === 0 && id !== globalControl.myPlayers[0].id && type !== 'food') {
+        // 球球亂走
+        if (Math.random() < 0.9) {
+          player.lastTarget = null
+          const newSpeed = {
+            x: getMap(Math.random(),0,1,-5,5),
+            y: getMap(Math.random(),0,1,-5,5),
+          }
+          player.speed = newSpeed
+        }
+        // 球球指定目標
+        if (Math.random() < 0.3) {
+          const targets = globalControl.players.filter((player2) => {
+            if (player2.getR() < getR() && player2.living && player2.type !== 'food') {
+              return (((Math.pow((pos.x - player2.pos.x), 2) + (Math.pow(pos.y - player2.pos.y, 2)) < (Math.pow(getR() + player2.getR(), 2)) + 100000)))
+            }
+            return false
+          })
+          if (targets[0]) player.lastTarget = targets[0]
+        }
+        // 球球逃離目標
+        if (Math.random() < 0.3) {
+          const targets = globalControl.players.filter((player2) => {
+            if (player2.getR() > getR() && player2.living && player2.type !== 'food') {
+              return Math.pow((pos.x - player2.pos.x), 2) + (Math.pow(pos.y - player2.pos.y, 2)) < (Math.pow(getR() + player2.getR(), 2)) + 100000
+            }
+            return false
+          })
+          if (targets[0]) player.getAwayTarget = targets[0]
+        }
+      } else {
+        if (player?.lastTarget?.living) {
+          let targetDelta = {
+            x: lastTarget.pos.x,
+            y: lastTarget.pos.y,
+          }
+          playerMove(player, targetDelta)
+        }
+        if (player?.getAwayTarget) {
+          let targetDelta = {
+            x: -getAwayTarget.pos.x,
+            y: -getAwayTarget.pos.y,
+          }
+          playerMove(player, targetDelta)
+        }
+      }
+
       globalControl.players.forEach((player2, index2) => {
         if (weight > player2.weight && index !== index2 && id !== player2.id && player2.living) {
           if (((Math.pow((pos.x - player2.pos.x), 2) + (Math.pow(pos.y - player2.pos.y, 2)) < (Math.pow(getR() + player2.getR(), 2) * 0.5)))) {
             // 球球吃掉效果
-            TweenMax.to(globalControl.players[index], 0.1, {
-              weight: globalControl.players[index].weight + player2.weight,
+            TweenMax.to(player, 0.1, {
+              weight: player.weight + player2.weight,
             })
             globalControl.players[index2].living = false
           }       
@@ -140,7 +189,7 @@ const AgarIo = () => {
       })
     }
 
-    if(weight < 0) globalControl.players[index].living = true
+    if(weight < 0) player.living = true
 
     ctx.fillStyle = color
     ctx.beginPath()
@@ -152,8 +201,15 @@ const AgarIo = () => {
       ctx.font = '10px Arial'
       ctx.fillStyle = '#fff'
       ctx.textAlign = 'center'
-      ctx.fillText(`${id}:(${pos.x}, ${pos.y}), ${getR()}`, pos.x, pos.y)
-      // ctx.fillText(id, pos.x, pos.y)
+      ctx.fillText(`${id}, ${getR()}`, pos.x, pos.y)
+    }
+
+    if (id === globalControl.myPlayers[0]?.id) {
+      ctx.strokeStyle = '#fff'
+      ctx.lineWidth = 3
+      ctx.beginPath()
+      ctx.arc(pos.x, pos.y, getR(), 0, 2 * Math.PI)
+      ctx.stroke()
     }
   })
 
@@ -180,7 +236,6 @@ const AgarIo = () => {
     ctx.stroke()
 
     globalControl.players = globalControl.players.filter(cur => cur.living)
-    // globalControl.myPlayers = globalControl.myPlayers.filter(cur => cur.living)
 
     // 繪製玩家球
     globalControl.players.forEach((cur, index) => {
@@ -206,6 +261,8 @@ const AgarIo = () => {
         color: `hsl(${Math.random() * 360}, 60%, 50%)`,
         getR: () => Math.sqrt(newPlayer.weight),
         getMaxSpeed: () => 30 / (1 + Math.log(newPlayer.getR())),
+        lastTarget: null,
+        getAwayTarget: null,
       }
       globalControl.players.push(newPlayer)
     }
@@ -237,10 +294,8 @@ const AgarIo = () => {
       let scale = 1/Math.log(Math.sqrt(globalControl.myPlayers[0].getR())/4+2)
       TweenMax.to(globalControl,2,{scale: scale})
     }, 2000)
-  }, [globalControl.players])
 
-  const update = () => {
-    // 產生新食物
+    // 產生新食物 & 新玩家
     setInterval(() => {
       if (globalControl.foodMax > globalControl.players.filter(cur => cur.type === 'food').length) {
         const newFood = {
@@ -262,6 +317,107 @@ const AgarIo = () => {
         }
         globalControl.players.push(newFood)
       }
+
+      if (globalControl.playerMax > globalControl.players.filter(cur => cur.type !== 'food').length) {
+        const newPlayer = {
+          id: parseInt(Math.random() * 10000),
+          pos: {
+            x: getMap(Math.random(), 0, 1, -globalControl.width / 2, globalControl.width / 2),
+            y: getMap(Math.random(), 0, 1, -globalControl.height / 2, globalControl.height / 2),
+          },
+          speed: {
+            x: getMap(Math.random(),0,1,-5,5),
+            y: getMap(Math.random(),0,1,-5,5),
+          },
+          weight: Math.random() * 1000 + 20,
+          living: true,
+          color: `hsl(${Math.random() * 360}, 60%, 50%)`,
+          getR: () => Math.sqrt(newPlayer.weight),
+          getMaxSpeed: () => 30 / (1 + Math.log(newPlayer.getR())),
+          lastTarget: null,
+          getAwayTarget: null,
+        }
+        globalControl.players.push(newPlayer)
+      }
+    }, 1000)
+  }, [globalControl.players])
+
+  // 繪製鏡頭縮小至左下角
+  const drawMap = () => {
+    ctx.save()
+    const gridWidth = globalControl.width
+    const mapScale = 0.05
+    ctx.translate((gridWidth * mapScale / 2 + 3), wh - (gridWidth * mapScale / 2 + 3))
+    ctx.scale(mapScale, mapScale)
+    // 繪製網格背景
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.2)'
+    ctx.fillRect(-(gridWidth / 2), -(gridWidth / 2), gridWidth, gridWidth)
+    // 繪製玩家所在框
+    const mapPlayerPosSize = 800
+    const centerPoint = { ...globalControl.myPlayers[0].pos }
+    ctx.strokeStyle = '#fff'
+    ctx.lineWidth = 5
+    ctx.strokeRect(centerPoint.x - (mapPlayerPosSize / 2), centerPoint.y - (mapPlayerPosSize / 2), mapPlayerPosSize, mapPlayerPosSize)
+    // 繪製地圖上玩家球
+    globalControl.players.forEach((cur) => {
+      if (cur.living && cur.type !== 'food') {
+        ctx.fillStyle = (cur.id === globalControl.myPlayers[0].id) ? '#ff0000' : '#fff'
+        ctx.beginPath()
+        ctx.arc(cur.pos.x, cur.pos.y, (cur.id === globalControl.myPlayers[0].id) ? 100 : 30, 0, 2 * Math.PI)
+        ctx.closePath()
+        ctx.fill()
+      }
+    })
+    ctx.restore()
+  }
+
+  const update = () => {
+    time.current += 1
+
+    // 產生新食物 & 新玩家
+    setInterval(() => {
+      if (globalControl.foodMax > globalControl.players.filter(cur => cur.type === 'food').length) {
+        const newFood = {
+          id: parseInt(Math.random() * 10000),
+          pos: {
+            x: getMap(Math.random(), 0, 1, -globalControl.width / 2, globalControl.width / 2),
+            y: getMap(Math.random(), 0, 1, -globalControl.height / 2, globalControl.height / 2),
+          },
+          speed: {
+            x: 0,
+            y: 0,
+          },
+          weight: 20,
+          living: true,
+          color: `hsl(${Math.random() * 360}, 60%, 50%)`,
+          getR: () => Math.sqrt(newFood.weight),
+          getMaxSpeed: () => 30 / (1 + Math.log(newFood.getR())),
+          type: 'food',
+        }
+        globalControl.players.push(newFood)
+      }
+
+      if (globalControl.playerMax > globalControl.players.filter(cur => cur.type !== 'food').length) {
+        const newPlayer = {
+          id: parseInt(Math.random() * 10000),
+          pos: {
+            x: getMap(Math.random(), 0, 1, -globalControl.width / 2, globalControl.width / 2),
+            y: getMap(Math.random(), 0, 1, -globalControl.height / 2, globalControl.height / 2),
+          },
+          speed: {
+            x: getMap(Math.random(),0,1,-5,5),
+            y: getMap(Math.random(),0,1,-5,5),
+          },
+          weight: Math.random() * 1000 + 20,
+          living: true,
+          color: `hsl(${Math.random() * 360}, 60%, 50%)`,
+          getR: () => Math.sqrt(newPlayer.weight),
+          getMaxSpeed: () => 30 / (1 + Math.log(newPlayer.getR())),
+          lastTarget: null,
+          getAwayTarget: null,
+        }
+        globalControl.players.push(newPlayer)
+      }
     }, 1000)
   }
 
@@ -274,6 +430,7 @@ const AgarIo = () => {
     onMouseEvent()
     setInterval(update, globalControl.FPS)
     setInterval(paint, globalControl.FPS)
+    setInterval(drawMap, globalControl.FPS)
   }, [ctx, ww, wh, globalControl.FPS])
 
   const initCanvas = useCallback(() => {
