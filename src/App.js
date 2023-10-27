@@ -21,6 +21,7 @@ import Particles from 'view/canvas/particles'
 import ScienceWeb from 'view/canvas/scienceWeb'
 import ChristmasTree from 'view/canvas/christmasTree'
 import AgarIo from 'view/canvas/agarIo'
+import DynamicTurntable from 'view/canvas/dynamicTurntable'
  
 const RouterPage = () => {
   return (
@@ -44,6 +45,7 @@ const RouterPage = () => {
       <Route exact path="christmasTree" element={<ChristmasTree/>} />
       <Route exact path="agarIo" element={<AgarIo/>} />
       <Route path="*" element={<EatCake/>} />
+      <Route exact path="dynamicTurntable" element={<DynamicTurntable/>} />
     </Routes>
   )
 }

@@ -69,6 +69,9 @@ const linkList = [{
 }, {
   name: 'Agar.io',
   to: '/agarIo',
+}, {
+  name: '動態唱盤',
+  to: '/dynamicTurntable',
 }]
 
 export default function Navbar() {
