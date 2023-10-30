@@ -72,6 +72,9 @@ const linkList = [{
 }, {
   name: '動態唱盤',
   to: '/dynamicTurntable',
+}, {
+  name: 'SVG - 描邊',
+  to: '/svgStroke',
 }]
 
 export default function Navbar() {
