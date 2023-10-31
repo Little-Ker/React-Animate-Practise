@@ -45,9 +45,9 @@ const RouterPage = () => {
       <Route exact path="scienceWeb" element={<ScienceWeb/>} />
       <Route exact path="christmasTree" element={<ChristmasTree/>} />
       <Route exact path="agarIo" element={<AgarIo/>} />
-      <Route path="*" element={<EatCake/>} />
       <Route exact path="dynamicTurntable" element={<DynamicTurntable/>} />
       <Route exact path="svgStroke" element={<Svg/>} />
+      <Route path="*" element={<EatCake/>} />
     </Routes>
   )
 }

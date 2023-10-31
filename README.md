@@ -35,11 +35,16 @@ https://little-ker.github.io/React-Animate-Practise/
 - [科幻風時鐘](https://little-ker.github.io/React-Animate-Practise/#/scienceWeb)
 - [聖誕樹](https://little-ker.github.io/React-Animate-Practise/#/christmasTree)
 - [Agar.io](https://little-ker.github.io/React-Animate-Practise/#/agarIo)
+- [動態唱盤](https://little-ker.github.io/React-Animate-Practise/#/dynamicTurntable)
+
+### SVG 動畫
+
+- [SVG - 描邊](https://little-ker.github.io/React-Animate-Practise/#/svgStroke)
 
 ## 使用技術
 
 - React、React Router、Redux
-- GSAP、webSocket
+- GSAP、webSocket、swiper
 - Eslint、clsx、sass
 
 <!-- ## 聲明
